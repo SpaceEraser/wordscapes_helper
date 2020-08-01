@@ -13,7 +13,11 @@ fn main() {
         Some(s) if s == "large" => false,
         _ => panic!("Usage: {} <small/large>\n\n\tsmall - use small dictionary\n\tlarge - use large dictionary", std::env::args().nth(0).unwrap())
     };
-    let dict_path = if use_small { "wordlist.txt" } else { "wordlist_large.txt" };
+    let dict_path = if use_small {
+        "wordlist.txt"
+    } else {
+        "wordlist_large.txt"
+    };
 
     let cheater = WordscapesLookup::from_wordlist(dict_path);
     println!("Constructed wordlist DAG");

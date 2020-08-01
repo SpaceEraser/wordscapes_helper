@@ -19,6 +19,10 @@ impl WordscapesLookupWrapper {
     pub fn lookup(&self, s: &str) -> String {
         self.0.lookup(s).join("\n")
     }
+
+    pub fn lookup_filter(&self, s: &str, filter: &str) -> String {
+        self.0.lookup_filter(s, filter).join("\n")
+    }
 }
 
 #[wasm_bindgen]

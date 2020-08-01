@@ -3,7 +3,7 @@
   "name": "wordscapes-cheater",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server "
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "1.3.1",

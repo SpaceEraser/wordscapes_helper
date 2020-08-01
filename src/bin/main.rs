@@ -13,9 +13,13 @@ fn main() {
     let cheater = WordscapesLookup::from_embedded_wordlist();
 
     let start = std::time::Instant::now();
+    let words = cheater.lookup(&*letters);
+    let elapsed = start.elapsed();
+    
     println!("Words that can be made from '{}':", letters);
-    for word in cheater.lookup(&*letters) {
+    for word in &words {
         println!("\t{}", word);
     }
-    println!("Lookup took {:?}", start.elapsed());
+    println!("Found {} items", words.len());
+    println!("Lookup took {:?}", elapsed);
 }
