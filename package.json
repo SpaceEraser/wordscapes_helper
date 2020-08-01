@@ -1,6 +1,6 @@
 {
   "author": "Bence Meszaros <bence.me@gmail.com>",
-  "name": "wordscapes-cheater",
+  "name": "wordscapes-helper",
   "scripts": {
     "build": "webpack",
     "serve": "webpack-dev-server "

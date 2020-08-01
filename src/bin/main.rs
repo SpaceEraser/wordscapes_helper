@@ -1,4 +1,4 @@
-use wordscapes_cheater::*;
+use wordscapes_helper::*;
 
 fn main() {
     let letters = if let Some(letters) = std::env::args().nth(1) {
@@ -10,10 +10,10 @@ fn main() {
         );
         std::process::exit(1)
     };
-    let cheater = WordscapesLookup::from_embedded_wordlist();
+    let helper = WordscapesHelper::from_embedded_wordlist();
 
     let start = std::time::Instant::now();
-    let words = cheater.lookup(&*letters);
+    let words = helper.lookup(&*letters);
     let elapsed = start.elapsed();
     
     println!("Words that can be made from '{}':", letters);

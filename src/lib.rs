@@ -2,18 +2,17 @@
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 use wasm_bindgen::prelude::*;
-pub use wordscapes_lookup::*;
+pub use wordscapes_helper::*;
 
-mod wordscapes_lookup;
+mod wordscapes_helper;
+#[wasm_bindgen]
+pub struct WordscapesHelperWrapper(WordscapesHelper);
 
 #[wasm_bindgen]
-pub struct WordscapesLookupWrapper(WordscapesLookup);
-
-#[wasm_bindgen]
-impl WordscapesLookupWrapper {
+impl WordscapesHelperWrapper {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
-        Self(WordscapesLookup::default())
+        Self(WordscapesHelper::default())
     }
 
     pub fn lookup(&self, s: &str) -> String {

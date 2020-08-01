@@ -1,5 +1,5 @@
 [package]
-name = "wordscapes-cheater"
+name = "wordscapes-helper"
 version = "0.1.0"
 authors = ["Bence Meszaros <bence.me@gmail.com>"]
 edition = "2018"

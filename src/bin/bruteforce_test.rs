@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use wordscapes_cheater::*;
+use wordscapes_helper::*;
 
 fn main() {
     let letters = if let Some(letters) = std::env::args().nth(1) {

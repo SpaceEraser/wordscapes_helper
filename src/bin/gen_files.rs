@@ -3,7 +3,7 @@ use std::io::BufWriter;
 use std::io::Write;
 use std::path::Path;
 
-use wordscapes_cheater::*;
+use wordscapes_helper::*;
 
 const DAG_FILENAME: &'static str = "dag.bin";
 
@@ -19,10 +19,10 @@ fn main() {
         "wordlist_large.txt"
     };
 
-    let cheater = WordscapesLookup::from_wordlist(dict_path);
+    let helper = WordscapesHelper::from_wordlist(dict_path);
     println!("Constructed wordlist DAG");
 
-    let binarr = bincode::serialize(&cheater).expect("Unable to serialize DAG");
+    let binarr = bincode::serialize(&helper).expect("Unable to serialize DAG");
     println!("Serialized DAG to Vec<u8>");
 
     let path = &Path::new("src").join(DAG_FILENAME);
