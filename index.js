@@ -1,7 +1,7 @@
 import("./pkg").then(module => {
     module.init();
     
-    window.helper = new module.WordscapesLookupWrapper();
+    window.helper = new module.WordscapesHelperWrapper();
 
     $("#given_letters, #filter").prop("disabled", false);
 
