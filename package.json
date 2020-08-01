@@ -1,0 +1,16 @@
+{
+  "author": "Bence Meszaros <bence.me@gmail.com>",
+  "name": "wordscapes-cheater",
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "@wasm-tool/wasm-pack-plugin": "1.3.1",
+    "@sinonjs/text-encoding": "^0.7.1",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
