@@ -26,7 +26,7 @@ impl Filter {
             } else if (filter[i] as char).is_ascii_alphabetic() {
                 processed_filter.push((filter[i] as char).to_ascii_lowercase());
             }
-            
+
             i += 1;
         }
 
@@ -34,13 +34,19 @@ impl Filter {
     }
 
     pub fn matches(&self, word: &str) -> bool {
-        if self.len() != word.len() { return false; }
+        if self.len() != word.len() {
+            return false;
+        }
 
         for (fc, wc) in self.0.chars().zip(word.chars()) {
-            if fc == '_' { continue }
-            if !fc.eq_ignore_ascii_case(&wc) { return false; }
+            if fc == '_' {
+                continue;
+            }
+            if !fc.eq_ignore_ascii_case(&wc) {
+                return false;
+            }
         }
-        
+
         return true;
     }
 

@@ -8,6 +8,10 @@ default-run = "main"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[[bench]]
+name = "bench_all"
+harness = false
+
 [dependencies]
 fixedbitset = "0.3.0"
 serde = { version="1.0.114", features = ["derive"] }
@@ -18,9 +22,16 @@ wasm-bindgen = "0.2.67"
 console_error_panic_hook = "0.1.6"
 wee_alloc = "0.4.5"
 
+[dev-dependencies]
+criterion = "0.3"
+
 [profile.release]
-opt-level = "s"
-incremental = false
+# The binary is already so huge, I don't think this makes a difference
+# opt-level = "s"
+codegen-units = 1
+
+[profile.bench]
+lto = true
 codegen-units = 1
 
 # disable wasm-opt due to bug: https://github.com/rustwasm/wasm-pack/issues/886

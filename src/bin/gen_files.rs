@@ -19,13 +19,15 @@ fn main() {
         "wordlist_large.txt"
     };
 
-    let helper = WordscapesHelper::from_wordlist(dict_path);
+    let helper = DAGSearcher::from_wordlist(dict_path);
     println!("Constructed wordlist DAG");
 
     let binarr = bincode::serialize(&helper).expect("Unable to serialize DAG");
     println!("Serialized DAG to Vec<u8>");
 
-    let path = &Path::new("src").join(DAG_FILENAME);
+    let path = &Path::new("src")
+        .join("wordscapes_helper")
+        .join(DAG_FILENAME);
     let file = File::create(path)
         .unwrap_or_else(|_| panic!("Unable to create DAG file '{}'", path.display()));
     let mut writer = BufWriter::new(file);
