@@ -1,60 +1,53 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 use wordscapes_helper::*;
 
 fn bench_dag(c: &mut Criterion) {
-    let searcher = DAGSearcher::from_embedded_wordlist();
-    
-    c.bench_function("dag `abc`", |b| {
-        b.iter(|| searcher.lookup(black_box("abc")))
-    });
-    c.bench_function("dag `abcdef`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdef")))
-    });
+    let searcher = DAGSearcher::default();
+
+    c.bench_function("dag `abc`", |b| b.iter(|| searcher.lookup("abc")));
+    c.bench_function("dag `abcdef`", |b| b.iter(|| searcher.lookup("abcdef")));
     c.bench_function("dag `abcdefghijkl`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdefghijkl")))
+        b.iter(|| searcher.lookup("abcdefghijkl"))
+    });
+    c.bench_function("dag `abcdefghijklmnopqrstuvwx`", |b| {
+        b.iter(|| searcher.lookup("abcdefghijkl"))
     });
 }
 
 fn bench_trie(c: &mut Criterion) {
-    let searcher = TrieSearcher::from_wordlist("wordlist_large.txt");
-    
-    c.bench_function("simple `abc`", |b| {
-        b.iter(|| searcher.lookup(black_box("abc")))
-    });
-    c.bench_function("simple `abcdef`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdef")))
-    });
-    c.bench_function("simple `abcdefghijkl`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdefghijkl")))
-    });
-}
+    let searcher = TrieSearcher::default();
 
-fn bench_simple(c: &mut Criterion) {
-    let searcher = SimpleSearcher::from_wordlist("wordlist_large.txt");
-    
-    c.bench_function("simple `abc`", |b| {
-        b.iter(|| searcher.lookup(black_box("abc")))
+    c.bench_function("trie `abc`", |b| b.iter(|| searcher.lookup("abc")));
+    c.bench_function("trie `abcdef`", |b| b.iter(|| searcher.lookup("abcdef")));
+    c.bench_function("trie `abcdefghijkl`", |b| {
+        b.iter(|| searcher.lookup("abcdefghijkl"))
     });
-    c.bench_function("simple `abcdef`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdef")))
-    });
-    c.bench_function("simple `abcdefghijkl`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdefghijkl")))
+    c.bench_function("trie `abcdefghijklmnopqrstuvwx`", |b| {
+        b.iter(|| searcher.lookup("abcdefghijkl"))
     });
 }
 
 fn bench_exp(c: &mut Criterion) {
-    let searcher = ExpSearcher::from_wordlist("wordlist_large.txt");
-    
-    c.bench_function("simple `abc`", |b| {
-        b.iter(|| searcher.lookup(black_box("abc")))
+    let searcher = ExpSearcher::default();
+
+    c.bench_function("exp `abc`", |b| b.iter(|| searcher.lookup("abc")));
+    c.bench_function("exp `abcdef`", |b| b.iter(|| searcher.lookup("abcdef")));
+    c.bench_function("exp `abcdefghijkl`", |b| {
+        b.iter(|| searcher.lookup("abcdefghijkl"))
     });
-    c.bench_function("simple `abcdef`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdef")))
-    });
+}
+
+fn bench_simple(c: &mut Criterion) {
+    let searcher = SimpleSearcher::default();
+
+    c.bench_function("simple `abc`", |b| b.iter(|| searcher.lookup("abc")));
+    c.bench_function("simple `abcdef`", |b| b.iter(|| searcher.lookup("abcdef")));
     c.bench_function("simple `abcdefghijkl`", |b| {
-        b.iter(|| searcher.lookup(black_box("abcdefghijkl")))
+        b.iter(|| searcher.lookup("abcdefghijkl"))
+    });
+    c.bench_function("simple `abcdefghijklmnopqrstuvwx`", |b| {
+        b.iter(|| searcher.lookup("abcdefghijkl"))
     });
 }
 

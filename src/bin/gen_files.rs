@@ -5,29 +5,16 @@ use std::path::Path;
 
 use wordscapes_helper::*;
 
-const DAG_FILENAME: &'static str = "dag.bin";
+const DAG_FILENAME: &str = "dag.bin";
 
 fn main() {
-    let use_small = match std::env::args().nth(1) {
-        Some(s) if s == "small" => true,
-        Some(s) if s == "large" => false,
-        _ => panic!("Usage: {} <small/large>\n\n\tsmall - use small dictionary\n\tlarge - use large dictionary", std::env::args().nth(0).unwrap())
-    };
-    let dict_path = if use_small {
-        "wordlist.txt"
-    } else {
-        "wordlist_large.txt"
-    };
-
-    let helper = DAGSearcher::from_wordlist(dict_path);
+    let helper = DAGSearcher::from_embedded_wordlist();
     println!("Constructed wordlist DAG");
 
     let binarr = bincode::serialize(&helper).expect("Unable to serialize DAG");
     println!("Serialized DAG to Vec<u8>");
 
-    let path = &Path::new("src")
-        .join("wordscapes_helper")
-        .join(DAG_FILENAME);
+    let path = &Path::new("src").join("word_searcher").join(DAG_FILENAME);
     let file = File::create(path)
         .unwrap_or_else(|_| panic!("Unable to create DAG file '{}'", path.display()));
     let mut writer = BufWriter::new(file);

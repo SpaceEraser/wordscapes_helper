@@ -12,16 +12,18 @@ fn main() {
     };
 
     let start = std::time::Instant::now();
+    let helper = DAGSearcher::default();
     // let helper = TrieSearcher::from_wordlist("wordlist_large.txt");
     // let helper = SimpleSearcher::from_wordlist("wordlist_large.txt");
-    let helper = ExpSearcher::from_wordlist("wordlist_large.txt");
-    // let helper = DAGSearcher::from_embedded_wordlist();
+    // let helper = ExpSearcher::from_wordlist("wordlist_large.txt");
     let elapsed = start.elapsed();
     println!("Setup took {:?}", elapsed);
 
     let start = std::time::Instant::now();
-    let words = helper.lookup(&*letters);
+    let mut words = helper.lookup(&*letters);
     let elapsed = start.elapsed();
+
+    words.sort_unstable_by_key(Word::frequency);
 
     println!("Words that can be made from '{}':", letters);
     for word in &words {
