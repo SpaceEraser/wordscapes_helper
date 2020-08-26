@@ -12,10 +12,11 @@ fn main() {
     };
 
     let start = std::time::Instant::now();
-    let helper = DAGSearcher::default();
-    // let helper = TrieSearcher::from_wordlist("wordlist_large.txt");
-    // let helper = SimpleSearcher::from_wordlist("wordlist_large.txt");
-    // let helper = ExpSearcher::from_wordlist("wordlist_large.txt");
+    // let helper = DAGSearcher::default();
+    // let helper = AutomatonSearcher::default();
+    // let helper = TrieSearcher::default();
+    let helper = SimpleSearcher::default();
+    // let helper = ExpSearcher::default();
     let elapsed = start.elapsed();
     println!("Setup took {:?}", elapsed);
 

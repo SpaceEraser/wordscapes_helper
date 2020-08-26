@@ -3,11 +3,13 @@ use super::{
 };
 use crate::Word;
 use serde::{Deserialize, Serialize};
+use fnv::FnvHashMap;
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SimpleSearcher {
-    length_inds: HashMap<usize, usize>,
+    length_inds: FnvHashMap<usize, usize>,
+    sorted_ind_keys: Vec<usize>,
     words: Vec<(AlphaMultiset, Vec<Word>)>,
 }
 
@@ -29,10 +31,11 @@ impl SimpleSearcher {
     fn from_wordmap(map: HashMap<AlphaMultiset, Vec<Word>>) -> Self {
         let mut words: Vec<_> = map.into_iter().collect();
         words.sort_unstable_by_key(|(s, _)| -(s.len() as isize));
+        
         let min_length = words.last().unwrap().0.len();
         let max_length = words.first().unwrap().0.len();
         let mut cur_length = min_length;
-        let mut length_inds = HashMap::new();
+        let mut length_inds = FnvHashMap::default();
 
         for (i, (set, _)) in words.iter().enumerate().rev() {
             let l = set.len();
@@ -44,15 +47,22 @@ impl SimpleSearcher {
         }
         length_inds.insert(max_length, 0);
 
-        Self { length_inds, words }
+        let mut sorted_ind_keys: Vec<_> = length_inds.keys().cloned().collect();
+        sorted_ind_keys.sort_unstable();
+
+        Self {
+            length_inds,
+            words,
+            sorted_ind_keys,
+        }
     }
 
     fn find_closest_index_key(&self, n: usize) -> usize {
-        let mut keys: Vec<_> = self.length_inds.keys().cloned().collect();
-        keys.sort_unstable();
-        match keys.binary_search(&n) {
+        match self.sorted_ind_keys.binary_search(&n) {
             Ok(_) => n,
-            Err(closest_ind) => keys[closest_ind],
+            Err(closest_ind) => {
+                self.sorted_ind_keys[closest_ind.clamp(0, self.sorted_ind_keys.len() - 1)]
+            }
         }
     }
 }

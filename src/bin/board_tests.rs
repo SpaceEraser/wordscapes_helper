@@ -15,8 +15,9 @@ _rainy____
 _y_n______
 ",
     )
-    .first_n_solutions(5) {
-        println!( "{}", sol);
+    .first_n_solutions(5)
+    {
+        println!("{}", sol);
     }
     println!(
         "{}",

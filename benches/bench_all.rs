@@ -11,8 +11,21 @@ fn bench_dag(c: &mut Criterion) {
         b.iter(|| searcher.lookup("abcdefghijkl"))
     });
     c.bench_function("dag `abcdefghijklmnopqrstuvwx`", |b| {
-        b.iter(|| searcher.lookup("abcdefghijkl"))
+        b.iter(|| searcher.lookup("abcdefghijklmnopqrstuvwx"))
     });
+}
+
+fn bench_dfa(c: &mut Criterion) {
+    let searcher = AutomatonSearcher::default();
+
+    c.bench_function("dfa `abc`", |b| b.iter(|| searcher.lookup("abc")));
+    c.bench_function("dfa `abcdef`", |b| b.iter(|| searcher.lookup("abcdef")));
+    // c.bench_function("dfa `abcdefghijkl`", |b| {
+    //     b.iter(|| searcher.lookup("abcdefghijkl"))
+    // });
+    // c.bench_function("dfa `abcdefghijklmnopqrstuvwx`", |b| {
+    //     b.iter(|| searcher.lookup("abcdefghijklmnopqrstuvwx"))
+    // });
 }
 
 fn bench_trie(c: &mut Criterion) {
@@ -24,7 +37,7 @@ fn bench_trie(c: &mut Criterion) {
         b.iter(|| searcher.lookup("abcdefghijkl"))
     });
     c.bench_function("trie `abcdefghijklmnopqrstuvwx`", |b| {
-        b.iter(|| searcher.lookup("abcdefghijkl"))
+        b.iter(|| searcher.lookup("abcdefghijklmnopqrstuvwx"))
     });
 }
 
@@ -47,9 +60,16 @@ fn bench_simple(c: &mut Criterion) {
         b.iter(|| searcher.lookup("abcdefghijkl"))
     });
     c.bench_function("simple `abcdefghijklmnopqrstuvwx`", |b| {
-        b.iter(|| searcher.lookup("abcdefghijkl"))
+        b.iter(|| searcher.lookup("abcdefghijklmnopqrstuvwx"))
     });
 }
 
-criterion_group!(benches, bench_dag, bench_trie, bench_exp, bench_simple);
+criterion_group!(
+    benches,
+    bench_dag,
+    bench_dfa,
+    bench_trie,
+    bench_exp,
+    bench_simple
+);
 criterion_main!(benches);

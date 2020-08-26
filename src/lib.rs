@@ -1,5 +1,6 @@
 #![feature(iterator_fold_self)]
 #![feature(move_ref_pattern)]
+#![feature(clamp)]
 
 // #[global_allocator]
 // static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;

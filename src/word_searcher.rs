@@ -3,6 +3,7 @@ use std::collections::HashMap;
 
 mod alpha_multiset;
 
+mod automaton_searcher;
 mod dag_searcher;
 mod exp_searcher;
 mod simple_searcher;
@@ -10,6 +11,7 @@ mod trie_searcher;
 
 pub use alpha_multiset::*;
 
+pub use automaton_searcher::*;
 pub use dag_searcher::*;
 pub use exp_searcher::*;
 pub use simple_searcher::*;
