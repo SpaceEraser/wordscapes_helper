@@ -18,7 +18,7 @@ This repository contains 5 algorithms to accomplish the former, as well as a web
 
 Wordscapes is a puzzle game in which a board (similar to a crossword puzzle) and a set of letters arranged in a circle is presented to the player. The objective is to swipe, starting at any letter, a sequence of letters that make up a word. The player can infer the number of letters in each target word, as well as the number of target words in each puzzle from the board. Words usually (but not always) intersect each other, which gives players clues about the position of certain letters in certain words.
 
-| <img src="drawing.jpg" alt="drawing" width="228"/> | 
+| <img src="assets/example_puzzle.jpg" alt="example puzzle" width="228"/> | 
 |:--:| 
 | *Example Wordscapes board* |
 
